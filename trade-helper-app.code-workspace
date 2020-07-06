@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "client",
+      "path": "./client"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "dist": true,
+      "node_modules": true,
+      ".parcel-cache": true
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "[typescript]": {
+      "editor.formatOnSave": false
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": false
+    },
+    "[javascript]": {
+      "editor.formatOnSave": false
+    },
+    "[javascriptreact]": {
+      "editor.formatOnSave": false
+    },
+    "files.eol": "\n",
+    "typescript.tsdk": "node_modules\\typescript\\lib"
+  }
+}
