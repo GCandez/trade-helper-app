@@ -7,7 +7,7 @@ const App = () => (
             asd
         </div>
     </h1>
-)
+);
 
 const mountingNode = document.getElementById('root',);
 render(<App />, mountingNode,);

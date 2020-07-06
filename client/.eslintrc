@@ -20,6 +20,13 @@
     "tsconfigRootDir": ".",
     "project": ["./tsconfig.json"]
   },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass", // Regex for Component Factory to use,
+      "pragma": "React", // Pragma to use, default to "React"
+      "version": "detect" // React version. "detect" automatically picks the version you have installed.
+    }
+  },
   "plugins": ["react", "@typescript-eslint", "react-hooks", "sonarjs"],
   "rules": {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
@@ -69,7 +76,7 @@
     "yoda": "error",
     "brace-style": ["error", "1tbs"],
     "camelcase": "warn",
-    "comma-dangle": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"],
     "computed-property-spacing": ["error", "never"],
     "jsx-quotes": ["error", "prefer-double"],
     "no-lonely-if": "error",
@@ -77,6 +84,7 @@
     "no-trailing-spaces": "error",
     "no-unneeded-ternary": "error",
     "no-extra-semi": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
 
     "react/jsx-boolean-value": ["error", "always"],
     "react/boolean-prop-naming": [
@@ -118,8 +126,8 @@
     "react/jsx-indent-props": ["error", 4],
     "react/no-danger-with-children": "error",
     "react/no-deprecated": "error",
-    "react/no-did-mount-set-state": ["error", "dissalow-in-func"],
-    "react/no-did-update-set-state": ["error", "dissalow-in-func"],
+    "react/no-did-mount-set-state": ["error", "disallow-in-func"],
+    "react/no-did-update-set-state": ["error", "disallow-in-func"],
     "react/no-direct-mutation-state": "error",
     "react/no-find-dom-node": "error",
     "react/no-is-mounted": "error",
