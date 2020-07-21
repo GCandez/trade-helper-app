@@ -1,6 +1,0 @@
-export default interface Shop {
-    id: string;
-    name: string;
-    cityId: string;
-    listingsIds: string[];
-}
