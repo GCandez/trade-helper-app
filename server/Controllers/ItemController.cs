@@ -9,22 +9,22 @@ using tradehelperapi.Models;
 namespace tradehelperapi.Controllers
 {
     [ApiController]
-    [Route("cities")]
-    public class CityController : ControllerBase
+    [Route("items")]
+    public class ItemController : ControllerBase
     {
         private DatabaseContext _context;
 
-        public CityController(DatabaseContext context)
+        public ItemController(DatabaseContext context)
         {
             _context = context;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<CityOverview>>> All()
+        public async Task<ActionResult<IEnumerable<ItemOverview>>> All()
         {
-            var cities = await _context.Cities.ToListAsync();
-            return cities.Select(c => new CityOverview
+            var items = await _context.Items.ToListAsync();
+            return items.Select(c => new ItemOverview
             {
                 Id = c.Id,
                 Name = c.Name
@@ -34,44 +34,45 @@ namespace tradehelperapi.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CityDetail>> Find(int id)
+        public async Task<ActionResult<ItemDetail>> Find(int id)
         {
-            var city = await _context.Cities.FindAsync(id);
-            if (city == null)
+            var item = await _context.Items.FindAsync(id);
+            if (item == null)
             {
                 return NotFound();
             }
 
-            return Ok(new CityDetail
+            return Ok(new ItemDetail
             {
-                Id = city.Id,
-                Name = city.Name,
-                ShopIds = city.Shops.Select(s => s.Id)
+                Id = item.Id,
+                Name = item.Name,
+                ListingIds = item.Listings.Select(l => l.Id)
             });
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<CityDetail>> Create(CityCreation model)
+        public async Task<ActionResult<ItemDetail>> Create(ItemCreation model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var city = new City
+            var item = new Item
             {
-                Name = model.Name
+                Name = model.Name,
             };
 
-            _context.Add(city);
+            _context.Items.Add(item);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Find), new { id = city.Id }, new CityDetail
+
+            return CreatedAtAction(nameof(Find), new { id = item.Id }, new ItemDetail
             {
-                Id = city.Id,
-                Name = city.Name,
-                ShopIds = city.Shops.Select(s => s.Id)
+                Id = item.Id,
+                Name = item.Name,
+                ListingIds = item.Listings.Select(l => l.Id)
             });
         }
 
@@ -79,28 +80,21 @@ namespace tradehelperapi.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Update(int id, ListingUpdate model)
+        public async Task<ActionResult> Update(int id, ItemUpdate model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var listing = await _context.Listings.FindAsync(id);
+            var item = await _context.Items.FindAsync(id);
 
-            if (listing == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            listing.History.Add(new ListingHistory
-            {
-                Listing = listing,
-                Price = model.Price,
-                Stock = model.Stock,
-                Date = model.Date
-            });
-
+            item.Name = model.Name;
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -111,14 +105,14 @@ namespace tradehelperapi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(int id)
         {
-            var city = await _context.Cities.FindAsync(id);
+            var item = await _context.Items.FindAsync(id);
 
-            if (city == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            _context.Cities.Remove(city);
+            _context.Items.Remove(item);
             await _context.SaveChangesAsync();
 
             return NoContent();

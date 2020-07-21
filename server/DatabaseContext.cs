@@ -7,6 +7,8 @@ namespace tradehelperapi
     {
         public DbSet<City> Cities { get; set; } = null!;
         public DbSet<Shop> Shops { get; set; } = null!;
+        public DbSet<Listing> Listings { get; set; } = null!;
+        public DbSet<Item> Items { get; set; } = null!;
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
