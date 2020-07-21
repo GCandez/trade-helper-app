@@ -62,7 +62,6 @@ namespace tradehelperapi
 
             app.UseOpenApi(); // serve OpenAPI/Swagger documents
             app.UseSwaggerUi3(); // serve Swagger UI
-            app.UseReDoc(); // serve ReDoc UI
 
             app.UseRouting();
 
