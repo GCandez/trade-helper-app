@@ -1,6 +1,6 @@
-export const STORAGE = {
-    ITEMS: 'LS_ITEMS',
-    CITIES: 'LS_CITIES',
-    LISTINGS: 'LS_LISTINGS',
-    SHOPS: 'LS_SHOPS',
-};
+import wretch from 'wretch';
+
+export const API_URL = '/api' as string;
+export const API = wretch().url(API_URL);
+
+

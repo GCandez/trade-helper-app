@@ -8,7 +8,10 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:sonarjs/recommended"
+    "plugin:sonarjs/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,17 +20,28 @@
     },
     "ecmaVersion": 11,
     "sourceType": "module",
-    "tsconfigRootDir": ".",
-    "project": ["./tsconfig.json"]
+    "project": "./tsconfig.json"
   },
   "settings": {
     "react": {
       "createClass": "createReactClass", // Regex for Component Factory to use,
       "pragma": "React", // Pragma to use, default to "React"
       "version": "detect" // React version. "detect" automatically picks the version you have installed.
+    },
+    "import/resolver": {
+      "alias": {
+        "map": [["~", "./src"]],
+        "extensions": [".ts", ".tsx", ".js", ".jsx"]
+      }
     }
   },
-  "plugins": ["react", "@typescript-eslint", "react-hooks", "sonarjs"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "sonarjs",
+    "import"
+  ],
   "rules": {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
@@ -63,7 +77,7 @@
     "no-eval": "error",
     "no-floating-decimal": "error",
     "no-implicit-coercion": "error",
-    "no-invalid-this": "error",
+    "no-invalid-this": "off",
     "no-iterator": "error",
     "no-param-reassign": "error",
     "no-return-await": "error",
@@ -85,6 +99,7 @@
     "no-unneeded-ternary": "error",
     "no-extra-semi": "off",
     "no-irregular-whitespace": "error",
+    "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
 
     "react/jsx-boolean-value": ["error", "always"],

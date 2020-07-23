@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -40,7 +39,7 @@ namespace tradehelperapi
                 options.UseMySql(MYSQL_CONNECTION_STRING, mysqlOptions => mysqlOptions.ServerVersion(new Version(10, 5, 2), ServerType.MariaDb));
             });
 
-            services.AddHealthChecks()
+            /* services.AddHealthChecks()
                     .AddDbContextCheck<DatabaseContext>();
 
 
@@ -48,7 +47,7 @@ namespace tradehelperapi
             {
                 setup.AddHealthCheckEndpoint("API", "/api/health");
             })
-                    .AddMySqlStorage(MYSQL_CONNECTION_STRING);
+                    .AddMySqlStorage(MYSQL_CONNECTION_STRING); */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,19 +63,18 @@ namespace tradehelperapi
             app.UseSwaggerUi3(); // serve Swagger UI
 
             app.UseRouting();
-
             app.UseAuthorization();
 
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/api/health", new HealthCheckOptions
+                /* endpoints.MapHealthChecks("/api/health", new HealthCheckOptions
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
-                endpoints.MapHealthChecksUI(options => options.UIPath = "/health");
+                endpoints.MapHealthChecksUI(options => options.UIPath = "/health"); */
             });
         }
     }

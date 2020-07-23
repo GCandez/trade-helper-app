@@ -9,7 +9,7 @@ using tradehelperapi.Models;
 namespace tradehelperapi.Controllers
 {
     [ApiController]
-    [Route("cities")]
+    [Route("api/cities")]
     public class CityController : ControllerBase
     {
         private DatabaseContext _context;

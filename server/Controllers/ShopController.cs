@@ -9,7 +9,7 @@ using tradehelperapi.Models;
 namespace tradehelperapi.Controllers
 {
     [ApiController]
-    [Route("shops")]
+    [Route("api/shops")]
     public class ShopController : ControllerBase
     {
         private DatabaseContext _context;
